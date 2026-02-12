@@ -11,6 +11,17 @@
         function()
         {
           console.log("HELLO WORLD its been 2 seconds yo");
+
+          // 1. Create the element (Allocate memory for the object)
+          const square = document.createElement('div');
+          
+          // 2. Configure properties (Set your "member variables")
+          square.style.width = '200px';
+          square.style.height = '200px';
+          square.style.backgroundColor = 'red';
+          
+          // 3. Append to the DOM (Inject it into the "Scene Graph")
+          document.body.appendChild(square);
         }
         , 2000);
       
