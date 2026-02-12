@@ -36,6 +36,10 @@
 
               document.body.appendChild(canvas);
 
+              // 4. Style it so it doesn't hide
+              canvas.style.display = "block";
+              canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
+
               ctx.fillStyle = "rgb(0, 0, 0)";
               ctx.fill();
             
