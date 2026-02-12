@@ -6,6 +6,10 @@
     <script>
       console.log("Starting...");
 
+      document.body.style.margin = "0";
+      document.body.style.padding = "0";
+      document.body.style.overflow = "hidden"; // Hide scrollbars
+      
       setTimeout(
         function()
         {
@@ -38,7 +42,6 @@
               document.body.appendChild(canvas);
 
               // 4. Style it so it doesn't hide
-
               ctx.fillStyle = "rgb(0, 255, 0)";
               ctx.fillRect(0, 0, canvas.width, canvas.height);
 
