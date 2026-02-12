@@ -30,8 +30,8 @@
 
               const canvas  = document.createElement('canvas');
               const ctx     = canvas.getContext('2d');
-              canvas.style.width  = '300px';
-              canvas.style.height = '300px';
+              canvas.style.width  = window.innerWidth;
+              canvas.style.height = window.innerHeight;
               canvas.style.display = "block";
               canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
 
@@ -42,7 +42,14 @@
               ctx.fillStyle = "rgb(0, 255, 0)";
               ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-              
+              ctx.fillStyle = "rgb(0, 0, 255)";
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(100, 50);
+              ctx.lineTo(50, 100);
+              ctx.lineTo(0, 0);
+              ctx.closePath();
+              ctx.fill();
             }
           );
         }
