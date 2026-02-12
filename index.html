@@ -26,7 +26,21 @@
           square.addEventListener('click', 
             function() 
             {
-              alert("Clicked!");
+              square.remove();
+              square = null;
+
+              const canvas  = document.createElement('canvas');
+              const ctx     = canvas.getContext('2d');
+              canvas.width  = window.innerWidth;
+              canvas.height = window.innerHeight;
+
+              document.body.appendChild(canvas);
+
+              ctx.fillStyle = "rgb(0, 0, 0)";
+              ctx.fill();
+            
+              
+              
             }
           );
         }
