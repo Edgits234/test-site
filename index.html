@@ -8,6 +8,17 @@
       sixty_seven = 10;
       console.log(sixty_seven);
       console.log("is that sixty seven???");
+
+      // 1. Create the element (Allocate memory for the object)
+      const square = document.createElement('div');
+      
+      // 2. Configure properties (Set your "member variables")
+      square.style.width = '200px';
+      square.style.height = '200px';
+      square.style.backgroundColor = 'red';
+      
+      // 3. Append to the DOM (Inject it into the "Scene Graph")
+      document.body.appendChild(square);
     </script>
   </body>
 </html>
