@@ -3,7 +3,7 @@
   <head>
   </head>
   <body>
-    "hello world!"
+    hello world!
     <script>
       console.log("Starting...");
 
@@ -31,14 +31,14 @@
 
               const canvas  = document.createElement('canvas');
               const ctx     = canvas.getContext('2d');
-              canvas.width  = window.innerWidth;
-              canvas.height = window.innerHeight;
+              canvas.width  = '300px';
+              canvas.height = '300px';
+              canvas.style.display = "block";
+              canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
 
               document.body.appendChild(canvas);
 
               // 4. Style it so it doesn't hide
-              canvas.style.display = "block";
-              canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
 
               ctx.fillStyle = "rgb(0, 0, 0)";
               ctx.fill();
