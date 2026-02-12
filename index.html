@@ -3,7 +3,6 @@
   <head>
   </head>
   <body>
-    hello world!
     <script>
       console.log("Starting...");
 
@@ -30,10 +29,8 @@
 
               const canvas  = document.createElement('canvas');
               const ctx     = canvas.getContext('2d');
-              //canvas.width  = window.innerWidth;
-              //canvas.height = window.innerHeight;
-              canvas.style.width  = "100vw";
-              canvas.style.height = "100vw";
+              canvas.width  = window.innerWidth;
+              canvas.height = window.innerHeight;
               canvas.style.display = "block";
               canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
               canvas.style.touchAction = "none";
