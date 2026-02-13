@@ -7,6 +7,10 @@
       // Global delta variables (your "input buffer")
       let mouseX = 0;
       let mouseY = 0;
+
+      // global variabel to keep track of where the mouse is
+      let mcx = 0;
+      let mcy = 0;
       
       console.log("Starting...");
 
@@ -31,14 +35,39 @@
       //get the mouse movement
       document.addEventListener("mousemove", function(event) {
           // We check document.pointerLockElement to ensure the capture is active
-          if (document.pointerLockElement !== null) {
+          if (document.pointerLockElement !== null) 
+          {
               mouseX = event.movementX;
               mouseY = event.movementY;
+
+              mcx += event.movementX;
+              mcy += event.movementY;
               
               // Log it to see it's working in real-time
               console.log("Delta X: " + mouseX + " | Delta Y: " + mouseY);
           }
       }, false);
+
+      function drawScreen(canvas, ctx)
+      {
+        // 4. Style it so it doesn't hide
+        ctx.fillStyle = "rgb(0, 255, 0)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        //draw a weird blue triangle
+        ctx.fillStyle = "rgb(0, 0, 255)";
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(100, 50);
+        ctx.lineTo(50, 100);
+        ctx.lineTo(0, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        //draw where the cursor is
+        ctx.fillStyle = "rgb(255, 0, 0)";//set color to red
+        ctx.fillRect(mcx - 5, mcy - 5, 10, 10);
+      }
       
       
       setTimeout(
@@ -78,20 +107,8 @@
                 }
               );
 
+              //put it in the html (so we can actually see it)
               document.body.appendChild(canvas);
-
-              // 4. Style it so it doesn't hide
-              ctx.fillStyle = "rgb(0, 255, 0)";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-              ctx.fillStyle = "rgb(0, 0, 255)";
-              ctx.beginPath();
-              ctx.moveTo(0, 0);
-              ctx.lineTo(100, 50);
-              ctx.lineTo(50, 100);
-              ctx.lineTo(0, 0);
-              ctx.closePath();
-              ctx.fill();
             }
           );
         }
