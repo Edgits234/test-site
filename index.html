@@ -54,6 +54,14 @@
               canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
               canvas.style.touchAction = "none";
 
+              canvas.addEventListener("click", 
+                function()
+                {
+                  //grab the cursor
+                  canvas.requestPointerLock();
+                }
+              );
+
               document.body.appendChild(canvas);
 
               // 4. Style it so it doesn't hide
