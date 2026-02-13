@@ -4,6 +4,10 @@
   </head>
   <body>
     <script>
+      // Global delta variables (your "input buffer")
+      let mouseX = 0;
+      let mouseY = 0;
+      
       console.log("Starting...");
 
       document.body.style.margin = "0";
@@ -23,6 +27,18 @@
           passive: false
         }
       );
+      
+      //get the mouse movement
+      document.addEventListener("mousemove", function(event) {
+          // We check document.pointerLockElement to ensure the capture is active
+          if (document.pointerLockElement !== null) {
+              mouseX = event.movementX;
+              mouseY = event.movementY;
+              
+              // Log it to see it's working in real-time
+              console.log("Delta X: " + mouseX + " | Delta Y: " + mouseY);
+          }
+      }, false);
       
       
       setTimeout(
