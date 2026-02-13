@@ -8,7 +8,13 @@
 
       document.body.style.margin = "0";
       document.body.style.padding = "0";
-      document.body.style.overflow = "hidden"; // Hide scrollbars
+
+      // This removes scrollbars and stops the browser from handling touch gestures
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+
+      
       
       setTimeout(
         function()
