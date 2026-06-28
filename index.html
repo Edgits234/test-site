@@ -1,120 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
+<head>
+    <title>Phone Client Test</title>
+</head>
+<body>
+    <h1>Internet Connection Test</h1>
+    <button id="connectBtn">Connect to Home PC</button>
+    <p id="status">Status: Disconnected</p>
+
     <script>
-      // Global delta variables (your "input buffer")
-      let mouseX = 0;
-      let mouseY = 0;
+        const connectBtn = document.getElementById('connectBtn');
+        const statusText = document.getElementById('status');
 
-      // global variabel to keep track of where the mouse is
-      let mcx = 0;
-      let mcy = 0;
-      
-      console.log("Starting...");
+        connectBtn.onclick = function() {
+            statusText.innerText = "Status: Connecting...";
+            
+            // Connect to the localtunnel secure web socket address (wss://)
+            // Notice we DO NOT type a port number here, localtunnel handles it on Port 443
+            const socket = new WebSocket('wss://lucky-cats-hide.loca.lt');
 
-      document.body.style.margin = "0";
-      document.body.style.padding = "0";
+            socket.onopen = function() {
+                statusText.innerText = "Status: Connected Perfectly!";
+                // Send a message the instant the pipe opens
+                socket.send("Middle finger to TeamViewer! It works!");
+            };
 
-      // This removes scrollbars and stops the browser from handling touch gestures
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      document.body.style.touchAction = "none";
+            socket.onmessage = function(event) {
+                alert("PC Replied: " + event.data);
+            };
 
-      document.addEventListener("wheel",
-        function(event) 
-        {
-            event.preventDefault();
-        }, 
-        {
-          passive: false
-        }
-      );
-      
-      //get the mouse movement
-      document.addEventListener("mousemove", function(event) {
-          // We check document.pointerLockElement to ensure the capture is active
-          if (document.pointerLockElement !== null) 
-          {
-              mouseX = event.movementX;
-              mouseY = event.movementY;
-
-              mcx += event.movementX;
-              mcy += event.movementY;
-              
-              // Log it to see it's working in real-time
-              console.log("Delta X: " + mouseX + " | Delta Y: " + mouseY);
-          }
-      }, false);
-
-      function drawScreen(canvas, ctx)
-      {
-        // 4. Style it so it doesn't hide
-        ctx.fillStyle = "rgb(0, 255, 0)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        //draw a weird blue triangle
-        ctx.fillStyle = "rgb(0, 0, 255)";
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(100, 50);
-        ctx.lineTo(50, 100);
-        ctx.lineTo(0, 0);
-        ctx.closePath();
-        ctx.fill();
-
-        //draw where the cursor is
-        ctx.fillStyle = "rgb(255, 0, 0)";//set color to red
-        ctx.fillRect(mcx - 5, mcy - 5, 10, 10);
-      }
-      
-      
-      setTimeout(
-        function()
-        {
-          console.log("HELLO WORLD its been 2 seconds yo");
-
-          // 1. Create the element (Allocate memory for the object)
-          const square = document.createElement('div');
-          
-          // 2. Configure properties (Set your "member variables")
-          square.style.width = '200px';
-          square.style.height = '200px';
-          square.style.backgroundColor = 'red';
-          
-          // 3. Append to the DOM (Inject it into the "Scene Graph")
-          document.body.appendChild(square);
-
-          square.addEventListener('click', 
-            function() 
-            {
-              square.remove();
-
-              const canvas  = document.createElement('canvas');
-              const ctx     = canvas.getContext('2d');
-              canvas.width  = window.innerWidth;
-              canvas.height = window.innerHeight;
-              canvas.style.display = "block";
-              canvas.style.backgroundColor = "rgb(30, 30, 30)"; // Dark grey background
-              canvas.style.touchAction = "none";
-
-              canvas.addEventListener("click", 
-                function()
-                {
-                  //grab the cursor
-                  canvas.requestPointerLock();
-                }
-              );
-
-              //put it in the html (so we can actually see it)
-              document.body.appendChild(canvas);
-            }
-          );
-        }
-      
-        , 2000);
-      
+            socket.onerror = function(error) {
+                statusText.innerText = "Status: Connection Failed.";
+            };
+        };
     </script>
-  </body>
+</body>
 </html>
